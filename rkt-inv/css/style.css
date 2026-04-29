@@ -1,6 +1,5 @@
 /* ─────────────────────────────────────────────────────────
-   WEDDING INVITATION — RAKOTE COFFEE
-   Tema: Luxury Elegant — Navy & Cream
+   RE-OPENING — RAKOTE COFFEE
    ───────────────────────────────────────────────────────── */
 
 /* ═══════════════════════════════════════════════════════
@@ -1225,3 +1224,7 @@ body {
   background: var(--gold-dark);   /* Thumb warna emas gelap */
   border-radius: 4px;             /* Sudut rounded */
 }
+
+/* Utility class untuk spacing */
+.mb-spacer { margin-bottom: 2.5rem; }
+/* mb = margin-bottom, spacer = penanda fungsi */
