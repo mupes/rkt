@@ -1,415 +1,561 @@
 /* ─────────────────────────────────────────────────────────
-   WEDDING INVITATION — Arjuna & Sinta
-   Aesthetic: Luxury editorial — dark champagne & gold
+   WEDDING INVITATION — RAKOTE COFFEE
+   Tema: Luxury Elegant — Navy & Cream
    ───────────────────────────────────────────────────────── */
 
+/* ═══════════════════════════════════════════════════════
+   CSS VARIABLES (CUSTOM PROPERTIES)
+   Tempat menyimpan nilai yang bisa dipakai ulang di seluruh CSS
+   Keuntungan: Ganti 1 variabel, seluruh website ikut berubah
+   ═══════════════════════════════════════════════════════ */
 :root {
-  --bg:          #0f0d0a;
-  --bg-2:        #1a1712;
-  --cream:       #f5efe6;
-  --gold:        #c9a96e;
-  --gold-light:  #e8d5a3;
-  --gold-dark:   #8b6914;
-  --text:        #2c2417;
-  --text-light:  #7a6a55;
-  --border:      rgba(201,169,110,0.3);
-  --shadow:      0 24px 60px rgba(0,0,0,0.18);
+  /* ── WARNA BACKGROUND ── */
+  --bg:          #0f172a;      /* Navy gelap (background utama section dark) */
+  --bg-2:        #1e293b;      /* Navy medium (background alternatif) */
+  
+  /* ── WARNA CREAM (teks & background terang) ── */
+  --cream:       #f5f0e6;      /* Cream utama (teks di background navy) */
+  --cream-light: #faf7f2;      /* Cream terang (background section terang) */
+  --cream-dark:  #e8dfd4;      /* Cream gelap (untuk border/hover) */
+  
+  /* ── WARNA ACCENT (emas sebagai aksen elegan) ── */
+  --gold:        #c9a96e;      /* Gold utama (aksen, tombol, highlight) */
+  --gold-light:  #e8d5a3;      /* Gold terang (hover effect) */
+  --gold-dark:   #8b6914;      /* Gold gelap (gradient tombol) */
+  
+  /* ── WARNA TEKS ── */
+  --text:        #1e293b;      /* Navy gelap (teks di background cream) */
+  --text-light:  #64748b;      /* Navy abu-abu (teks sekunder/deskripsi) */
+  
+  /* ── WARNA BORDERS & SHADOW ── */
+  --border:      rgba(201,169,110,0.3);  /* Border emas transparan */
+  --shadow:      0 24px 60px rgba(15,23,42,0.25);  /* Shadow navy transparan */
 
-  --ff-display:  'Great Vibes', cursive;
-  --ff-serif:    'Cormorant Garamond', serif;
-  --ff-sans:     'Jost', sans-serif;
+  /* ── FONT FAMILY (Jenis Huruf) ── */
+  --ff-display:  'Great Vibes', cursive;      /* Font script elegan (nama, judul) */
+  --ff-serif:    'Cormorant Garamond', serif; /* Font serif klasik (heading, quote) */
+  --ff-sans:     'Jost', sans-serif;          /* Font sans-serif modern (body text) */
 
-  --radius:      16px;
-  --trans:       0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* ── UI PROPERTIES ── */
+  --radius:      16px;  /* Radius border untuk elemen rounded */
+  --trans:       0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);  /* Transisi animasi halus */
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ═══════════════════════════════════════════════════════
+   RESET & BASE STYLES
+   Menormalkan styling default browser agar konsisten
+   ═══════════════════════════════════════════════════════ */
 
-html { scroll-behavior: smooth; }
+/* Box-sizing: border-box = Padding & border tidak menambah lebar elemen */
+*, *::before, *::after { 
+  box-sizing: border-box;  /* Penting untuk layout yang akurat */
+  margin: 0;                /* Hapus margin default */
+  padding: 0;               /* Hapus padding default */
+}
 
+/* Scroll halus saat klik link anchor (#section) */
+html { 
+  scroll-behavior: smooth;  /* Efek scroll smooth untuk navigasi */
+}
+
+/* Styling dasar untuk body/tag utama */
 body {
-  font-family: var(--ff-sans);
-  background: var(--bg);
-  color: var(--cream);
-  overflow-x: hidden;
+  font-family: var(--ff-sans);      /* Gunakan font sans untuk teks body */
+  background: var(--bg);            /* Background navy gelap */
+  color: var(--cream);              /* Teks cream agar kontras di navy */
+  overflow-x: hidden;               /* Sembunyikan scroll horizontal (mencegah bug) */
+  line-height: 1.6;                 /* Jarak antar baris agar nyaman dibaca */
 }
 
-/* ── HIDDEN / VISIBLE ──────────────────────────── */
-.hidden { display: none !important; }
+/* ═══════════════════════════════════════════════════════
+   UTILITY CLASSES (Kelas Pembantu)
+   ═══════════════════════════════════════════════════════ */
 
-/* ── COVER ─────────────────────────────────────── */
+/* .hidden = Sembunyikan elemen sepenuhnya */
+.hidden { 
+  display: none !important;  /* !important = Paksa override style lain */
+}
+
+/* ═══════════════════════════════════════════════════════
+   COVER SECTION (Halaman Depan)
+   ═══════════════════════════════════════════════════════ */
+
 #cover {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: #0a0806;
+  position: fixed;            /* Tetap di layar meski discroll */
+  inset: 0;                   /* Singkatan: top:0; right:0; bottom:0; left:0 */
+  z-index: 100;               /* Pastikan di atas elemen lain */
+  display: flex;              /* Flexbox untuk centering konten */
+  align-items: center;        /* Center vertikal */
+  justify-content: center;    /* Center horizontal */
+  overflow: hidden;           /* Sembunyikan elemen yang keluar area */
+  background: #0a0f1a;        /* Navy sangat gelap untuk cover */
 }
 
+/* Background cover dengan gradient + pattern SVG */
 .cover-bg {
-  position: absolute;
-  inset: 0;
+  position: absolute;         /* Posisikan di belakang konten */
+  inset: 0;                   /* Penuhi seluruh area parent */
   background:
+    /* Gradient radial: efek cahaya emas di tengah */
     radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,169,110,0.08) 0%, transparent 70%),
+    /* Pattern SVG inline: tekstur halus (data URI) */
     url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a96e' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
+/* Hiasan floral (bunga) di atas & bawah cover */
 .floral-top, .floral-bottom {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(400px, 90vw);
-  height: 160px;
+  position: absolute;         /* Posisi relatif terhadap #cover */
+  left: 50%;                  /* Tengah horizontal */
+  transform: translateX(-50%);/* Koreksi agar benar-benar tengah */
+  width: min(400px, 90vw);    /* Responsif: max 400px atau 90% viewport */
+  height: 160px;              /* Tinggi tetap */
   background: url('assets/floral.png') center/contain no-repeat;
-  opacity: 0.35;
-  pointer-events: none;
+  /* center/contain = Gambar di tengah, diskalakan agar muat, tidak repeat */
+  opacity: 0.35;              /* Transparan agar tidak mengganggu teks */
+  pointer-events: none;       /* Klik tembus ke elemen bawah */
 }
-.floral-top { top: 0; }
-.floral-bottom { bottom: 0; transform: translateX(-50%) scaleY(-1); }
+.floral-top { top: 0; }       /* Posisi di atas */
+.floral-bottom { 
+  bottom: 0;                  /* Posisi di bawah */
+  transform: translateX(-50%) scaleY(-1); /* Flip vertikal agar simetris */
+}
 
+/* Container konten cover (teks & tombol) */
 .cover-content {
-  position: relative;
-  text-align: center;
-  padding: 2rem 1.5rem;
-  animation: fadeSlideUp 1.2s ease both;
+  position: relative;         /* Untuk positioning child elements */
+  text-align: center;         /* Teks rata tengah */
+  padding: 2rem 1.5rem;       /* Spacing dalam */
+  animation: fadeSlideUp 1.2s ease both;  /* Animasi muncul dari bawah */
 }
 
+/* Tulisan Bismillah (font Arab) */
 .cover-bismillah {
-  font-family: 'Scheherazade New', serif;
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  color: var(--gold);
-  letter-spacing: 0.04em;
-  margin-bottom: 1rem;
+  font-family: 'Scheherazade New', serif;  /* Font khusus aksara Arab */
+  font-size: clamp(1.4rem, 4vw, 2rem);     /* Responsif: min 1.4rem, ideal 4vw, max 2rem */
+  color: var(--gold);                      /* Warna emas */
+  letter-spacing: 0.04em;                  /* Jarak antar huruf sedikit renggang */
+  margin-bottom: 1rem;                     /* Jarak ke elemen bawah */
 }
 
+/* Label "Undangan Re-Opening" */
 .cover-label {
-  font-family: var(--ff-sans);
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold-light);
+  font-family: var(--ff-sans);             /* Font sans-serif modern */
+  font-size: 0.75rem;                      /* Ukuran kecil */
+  font-weight: 400;                        /* Ketebalan normal */
+  letter-spacing: 0.3em;                   /* Jarak huruf sangat renggang (efek elegan) */
+  text-transform: uppercase;               /* Huruf kapital semua */
+  color: var(--gold-light);                /* Emas terang */
   margin-bottom: 1.5rem;
 }
 
+/* Container nama mempelai/produk */
 .cover-names {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  line-height: 1;
+  display: flex;                           /* Flexbox untuk layout vertikal */
+  flex-direction: column;                  /* Susun anak elemen ke bawah */
+  align-items: center;                     /* Tengah horizontal */
+  gap: 0;                                  /* Tidak ada jarak antar anak */
+  line-height: 1;                          /* Jarak baris rapat */
 }
 
+/* Nama produk 1 & 2 (font script besar) */
 .name-groom, .name-bride {
-  font-family: var(--ff-display);
-  font-size: clamp(3.5rem, 12vw, 7rem);
-  color: var(--cream);
-  display: block;
+  font-family: var(--ff-display);          /* Font tulisan tangan elegan */
+  font-size: clamp(3.5rem, 12vw, 7rem);    /* Sangat responsif untuk mobile/desktop */
+  color: var(--cream);                     /* Warna cream kontras dengan navy */
+  display: block;                          /* Pastikan tiap nama di baris sendiri */
 }
 
+/* Simbol "&" di antara nama */
 .cover-ampersand {
   font-family: var(--ff-display);
   font-size: clamp(2rem, 7vw, 4rem);
-  color: var(--gold);
+  color: var(--gold);                      /* Emas untuk aksen */
   display: block;
   line-height: 1.1;
 }
 
+/* Tanggal acara */
 .cover-date {
-  font-family: var(--ff-serif);
+  font-family: var(--ff-serif);            /* Font serif klasik */
   font-size: clamp(1rem, 3vw, 1.25rem);
-  font-style: italic;
+  font-style: italic;                      /* Miring untuk kesan formal */
   color: var(--gold-light);
   margin: 1.2rem 0;
   letter-spacing: 0.1em;
 }
 
+/* Garis pemisah dengan ikon */
 .cover-divider {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.75rem;                            /* Jarak antar anak elemen */
   justify-content: center;
   color: var(--gold);
   margin: 0.5rem 0 1rem;
 }
 .cover-divider span {
   display: block;
-  height: 1px;
-  width: 60px;
-  background: var(--gold);
-  opacity: 0.5;
+  height: 1px;                             /* Garis tipis */
+  width: 60px;                             /* Panjang garis */
+  background: var(--gold);                 /* Warna emas */
+  opacity: 0.5;                            /* Sedikit transparan */
 }
 
+/* Ucapan "Kepada Yth." */
 .cover-to {
   font-size: 0.85rem;
-  color: rgba(245,239,230,0.7);
+  color: rgba(245,240,230,0.7);            /* Cream dengan transparansi 70% */
   letter-spacing: 0.05em;
   margin-bottom: 2rem;
 }
 .cover-to span {
-  color: var(--gold-light);
-  font-weight: 500;
+  color: var(--gold-light);                /* Nama tamu lebih menonjol */
+  font-weight: 500;                        /* Sedikit lebih tebal */
 }
 
+/* Tombol "Buka Undangan" */
 .open-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 2.2rem;
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-  color: #0f0d0a;
+  display: inline-flex;                    /* Flex tapi inline (ikut aliran teks) */
+  align-items: center;                     /* Tengah vertikal */
+  gap: 0.5rem;                             /* Jarak teks & ikon */
+  padding: 0.85rem 2.2rem;                 /* Padding vertikal & horizontal */
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));  /* Gradient emas */
+  color: #0f172a;                          /* Teks navy di atas emas */
   font-family: var(--ff-sans);
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: var(--trans);
-  box-shadow: 0 8px 30px rgba(201,169,110,0.3);
+  border: none;                            /* Hapus border default button */
+  border-radius: 100px;                    /* Bentuk pill/lonjong */
+  cursor: pointer;                         /* Cursor jadi tangan saat hover */
+  transition: var(--trans);                /* Animasi halus untuk hover */
+  box-shadow: 0 8px 30px rgba(201,169,110,0.3);  /* Bayangan emas */
 }
 .open-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(201,169,110,0.4);
+  transform: translateY(-3px);             /* Naik sedikit saat hover */
+  box-shadow: 0 16px 40px rgba(201,169,110,0.4);  /* Bayangan lebih besar */
 }
 
-/* ── PETALS ─────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   ANIMASI KELPAK BUNGA (PETALS)
+   ═══════════════════════════════════════════════════════ */
+
 .petals-container {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  overflow: hidden;
+  pointer-events: none;   /* Klik tembus ke elemen bawah */
+  overflow: hidden;       /* Sembunyikan kelopak yang keluar area */
 }
+
+/* Styling tiap kelopak */
 .petal {
   position: absolute;
-  top: -20px;
-  width: 8px;
-  height: 10px;
-  border-radius: 0 100% 0 100%;
+  top: -20px;             /* Mulai dari atas layar */
+  width: 8px;             /* Lebar kelopak */
+  height: 10px;           /* Tinggi kelopak */
+  border-radius: 0 100% 0 100%;  /* Bentuk kelopak mawar */
   background: linear-gradient(135deg, rgba(201,169,110,0.4), rgba(232,213,163,0.2));
-  animation: petalFall linear infinite;
+  animation: petalFall linear infinite;  /* Animasi jatuh terus-menerus */
 }
 
+/* Keyframes: Definisi animasi jatuh kelopak */
 @keyframes petalFall {
-  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  0% { 
+    transform: translateY(-20px) rotate(0deg);  /* Mulai: di atas, tidak rotasi */
+    opacity: 1;                                  /* Opasitas penuh */
+  }
+  100% { 
+    transform: translateY(100vh) rotate(360deg);/* Akhir: jatuh 100vh, rotasi 360° */
+    opacity: 0;                                  /* Memudar saat jatuh */
+  }
 }
 
-/* ── MAIN CONTENT ───────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   MAIN CONTENT (Konten Setelah Cover Dibuka)
+   ═══════════════════════════════════════════════════════ */
+
 #mainContent {
-  background: var(--cream);
-  color: var(--text);
+  background: var(--cream);   /* Background cream untuk konten utama */
+  color: var(--text);         /* Teks navy gelap agar kontras di cream */
 }
-#mainContent.visible { display: block; animation: fadeSlideUp 0.8s ease both; }
+/* Kelas .visible ditambahkan via JS untuk menampilkan konten */
+#mainContent.visible { 
+  display: block; 
+  animation: fadeSlideUp 0.8s ease both;  /* Animasi muncul halus */
+}
 
-/* ── SECTIONS ───────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   SECTION GLOBAL STYLES
+   ═══════════════════════════════════════════════════════ */
+
 .section {
   padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3rem);
-  max-width: 900px;
-  margin: 0 auto;
+  /* Padding responsif: vertikal 3-6rem, horizontal 1.25-3rem */
+  max-width: 900px;           /* Lebar maksimal konten */
+  margin: 0 auto;             /* Tengah horizontal (auto margin kiri-kanan) */
 }
 
-/* ── TYPOGRAPHY ─────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   TYPOGRAPHY (Gaya Teks)
+   ═══════════════════════════════════════════════════════ */
+
 .section-heading {
   font-family: var(--ff-serif);
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  font-weight: 300;
-  letter-spacing: 0.05em;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);  /* Responsif */
+  font-weight: 300;           /* Tipis untuk kesan elegan */
+  letter-spacing: 0.05em;     /* Jarak huruf sedikit renggang */
   text-align: center;
-  color: var(--text);
+  color: var(--text);         /* Navy gelap di background cream */
   margin-bottom: 0.5rem;
 }
 
 .section-title-script {
-  font-family: var(--ff-display);
+  font-family: var(--ff-display);  /* Font script untuk judul utama */
   font-size: clamp(2.5rem, 8vw, 4.5rem);
-  color: var(--gold-dark);
+  color: var(--gold-dark);    /* Emas gelap untuk kontras di cream */
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.2;           /* Jarak baris rapat untuk font script */
   margin-bottom: 1.5rem;
 }
 
 .section-subtitle {
   font-family: var(--ff-sans);
   font-size: 0.8rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
+  letter-spacing: 0.25em;     /* Jarak huruf sangat renggang (efek luxury) */
+  text-transform: uppercase;  /* Kapital semua */
   text-align: center;
-  color: var(--text-light);
+  color: var(--text-light);   /* Navy abu-abu untuk teks sekunder */
   margin-bottom: 0.75rem;
 }
 
-/* ── ORNAMENT ───────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   ORNAMENT / DEKORASI
+   ═══════════════════════════════════════════════════════ */
+
 .ornament-line {
-  height: 1px;
+  height: 1px;                /* Garis tipis */
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  margin: 2rem auto;
-  max-width: 300px;
+  /* Gradient: transparan → emas → transparan (efek memudar di ujung) */
+  margin: 2rem auto;          /* Jarak vertikal 2rem, tengah horizontal */
+  max-width: 300px;           /* Panjang maksimal garis */
 }
 
-/* ── HERO ───────────────────────────────────────── */
-.hero-section { background: var(--cream); text-align: center; }
+/* ═══════════════════════════════════════════════════════
+   HERO SECTION (Quote/Ayat Pembuka)
+   ═══════════════════════════════════════════════════════ */
+
+.hero-section { 
+  background: var(--cream);   /* Background cream */
+  text-align: center; 
+}
 
 .hero-verse {
   font-family: var(--ff-serif);
   font-size: clamp(1rem, 2.5vw, 1.2rem);
-  font-style: italic;
-  color: var(--text-light);
-  max-width: 560px;
-  margin: 0 auto;
-  line-height: 1.8;
+  font-style: italic;         /* Miring untuk quote */
+  color: var(--text-light);   /* Navy abu-abu */
+  max-width: 560px;           /* Lebar maksimal agar tidak terlalu panjang */
+  margin: 0 auto;             /* Tengah horizontal */
+  line-height: 1.8;           /* Jarak baris longgar untuk kenyamanan baca */
 }
 .hero-verse em {
-  display: block;
-  font-size: 0.9em;
-  color: var(--gold-dark);
+  display: block;             /* Sumber ayat di baris baru */
+  font-size: 0.9em;           /* Sedikit lebih kecil dari teks utama */
+  color: var(--gold-dark);    /* Emas gelap untuk penekanan */
   margin-top: 0.5rem;
-  font-style: normal;
+  font-style: normal;         /* Kembali ke normal (tidak miring) */
   letter-spacing: 0.05em;
 }
 
-/* ── COUPLE ─────────────────────────────────────── */
-.couple-section { background: #faf7f2; }
+/* ═══════════════════════════════════════════════════════
+   COUPLE SECTION (Profil Produk)
+   ═══════════════════════════════════════════════════════ */
+
+.couple-section { 
+  background: var(--cream-light);  /* Cream sangat terang sebagai variasi */
+}
+
 .couple-grid {
-  display: grid;
-  grid-template-columns: 1fr 80px 1fr;
-  gap: 1rem;
-  align-items: center;
+  display: grid;              /* CSS Grid untuk layout 3 kolom */
+  grid-template-columns: 1fr 80px 1fr;  /* Kiri:1fr, Tengah:80px, Kanan:1fr */
+  gap: 1rem;                  /* Jarak antar grid item */
+  align-items: center;        /* Tengah vertikal */
   margin-top: 2rem;
 }
+
+/* Responsive: Ubah ke 1 kolom di mobile */
 @media (max-width: 600px) {
-  .couple-grid { grid-template-columns: 1fr; }
-  .couple-heart { order: 2; }
+  .couple-grid { 
+    grid-template-columns: 1fr;  /* 1 kolom penuh */
+  }
+  .couple-heart { 
+    order: 2;  /* Pindah hati ke posisi tengah (setelah kartu pertama) */
+  }
 }
 
+/* Kartu profil produk */
 .person-card {
-  background: white;
-  border-radius: var(--radius);
+  background: white;          /* Background putih bersih */
+  border-radius: var(--radius);  /* Sudut rounded dari variabel */
   padding: 2rem 1.5rem;
   text-align: center;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(201,169,110,0.15);
-  transition: var(--trans);
+  box-shadow: var(--shadow);  /* Bayangan navy transparan */
+  border: 1px solid rgba(201,169,110,0.15);  /* Border emas tipis */
+  transition: var(--trans);   /* Animasi untuk hover effect */
 }
-.person-card:hover { transform: translateY(-6px); box-shadow: 0 32px 70px rgba(0,0,0,0.12); }
+.person-card:hover { 
+  transform: translateY(-6px);  /* Naik saat hover */
+  box-shadow: 0 32px 70px rgba(0,0,0,0.12);  /* Bayangan lebih besar */
+}
 
+/* Wrapper foto profil (dengan border gradient) */
 .person-photo-wrap {
   width: 120px;
   height: 120px;
-  margin: 0 auto 1.25rem;
-  border-radius: 50%;
-  padding: 3px;
+  margin: 0 auto 1.25rem;     /* Tengah horizontal + jarak bawah */
+  border-radius: 50%;         /* Bentuk lingkaran */
+  padding: 3px;               /* Ruang untuk border gradient */
   background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+  /* Gradient emas untuk frame foto */
 }
+
+/* Area foto (background image) */
 .person-photo {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  background: #e8ddd0 center/cover no-repeat;
+  border-radius: 50%;         /* Ikuti bentuk lingkaran parent */
+  background: #e8dfd4 center/cover no-repeat;
+  /* Placeholder color + posisi tengah + cover + tidak repeat */
 }
 
+/* Nama produk */
 .person-name {
   font-family: var(--ff-serif);
   font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--text);
+  font-weight: 600;           /* Semi-bold */
+  color: var(--text);         /* Navy gelap */
   margin-bottom: 0.5rem;
 }
+
+/* Deskripsi produk */
 .person-desc {
   font-size: 0.82rem;
-  color: var(--text-light);
-  line-height: 1.6;
+  color: var(--text-light);   /* Navy abu-abu */
+  line-height: 1.6;           /* Jarak baris nyaman */
 }
 
-.person-social { margin-top: 1rem; }
+/* Ikon sosial media */
+.person-social { 
+  margin-top: 1rem; 
+}
 .person-social a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 34px;
   height: 34px;
-  border-radius: 50%;
+  border-radius: 50%;         /* Lingkaran */
   border: 1px solid var(--border);
   color: var(--gold-dark);
   transition: var(--trans);
 }
-.person-social a:hover { background: var(--gold-dark); color: white; }
+.person-social a:hover { 
+  background: var(--gold-dark);  /* Background emas saat hover */
+  color: white;                    /* Teks putih kontras */
+}
 
+/* Icon hati di tengah */
 .couple-heart {
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--gold);
 }
-.couple-heart svg { width: 50px; height: 50px; animation: heartbeat 2s ease-in-out infinite; }
-
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+.couple-heart svg { 
+  width: 50px; 
+  height: 50px; 
+  animation: heartbeat 2s ease-in-out infinite;  /* Animasi denyut */
 }
 
-/* ── COUNTDOWN ──────────────────────────────────── */
+/* Keyframes animasi denyut hati */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }    /* Ukuran normal */
+  50% { transform: scale(1.15); }      /* Membesar 15% di tengah */
+}
+
+/* ═══════════════════════════════════════════════════════
+   COUNTDOWN SECTION (Hitung Mundur)
+   ═══════════════════════════════════════════════════════ */
+
 .countdown-section {
   position: relative;
-  background: var(--bg);
+  background: var(--bg);      /* Background navy gelap */
   overflow: hidden;
   text-align: center;
   max-width: 100%;
   padding: clamp(4rem, 10vw, 8rem) clamp(1.25rem, 5vw, 3rem);
 }
+
+/* Background effect countdown */
 .countdown-bg {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 70%);
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 70%);
+  /* Cahaya emas lembut di tengah */
 }
-.countdown-inner { position: relative; max-width: 700px; margin: 0 auto; }
 
+.countdown-inner { 
+  position: relative;         /* Agar konten di atas .countdown-bg */
+  max-width: 700px; 
+  margin: 0 auto; 
+}
+
+/* Tanggal countdown */
 .countdown-date {
   font-family: var(--ff-serif);
   font-size: clamp(1.1rem, 3vw, 1.5rem);
   font-style: italic;
-  color: rgba(245,239,230,0.8);
+  color: rgba(245,240,230,0.8);  /* Cream dengan 80% opacity */
   margin-bottom: 2rem;
 }
 
+/* Grid angka countdown */
 .countdown-grid {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   margin-bottom: 2.5rem;
-  flex-wrap: wrap;
+  flex-wrap: wrap;            /* Bungkus ke baris baru jika layar sempit */
 }
 
+/* Kotak angka countdown */
 .countdown-item {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.04);  /* Putih transparan sangat tipis */
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1rem 1.25rem;
-  min-width: 80px;
+  min-width: 80px;            /* Lebar minimal agar konsisten */
 }
 .countdown-item span {
   display: block;
   font-family: var(--ff-serif);
-  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-size: clamp(2rem, 6vw, 3.5rem);  /* Angka besar responsif */
   font-weight: 300;
-  color: var(--gold);
+  color: var(--gold);         /* Emas untuk angka */
   line-height: 1;
 }
 .countdown-item label {
-  font-size: 0.65rem;
+  font-size: 0.65rem;         /* Label kecil */
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(245,239,230,0.5);
+  color: rgba(245,240,230,0.5);  /* Cream transparan */
   margin-top: 0.3rem;
   display: block;
 }
 
+/* Pemisah titik dua */
 .countdown-sep {
   font-size: 2rem;
   color: var(--gold);
@@ -417,32 +563,48 @@ body {
   font-weight: 300;
 }
 
+/* Tombol "Tambahkan ke Kalender" */
 .btn-outline {
   display: inline-block;
   padding: 0.75rem 1.75rem;
-  border: 1px solid var(--gold);
+  border: 1px solid var(--gold);  /* Border emas */
   border-radius: 100px;
-  color: var(--gold);
+  color: var(--gold);              /* Teks emas */
   font-family: var(--ff-sans);
   font-size: 0.8rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  background: transparent;
+  background: transparent;         /* Background transparan */
   cursor: pointer;
   transition: var(--trans);
 }
-.btn-outline:hover { background: var(--gold); color: var(--bg); }
+.btn-outline:hover { 
+  background: var(--gold);    /* Background emas saat hover */
+  color: var(--bg);           /* Teks navy kontras */
+}
 
-/* ── EVENTS ─────────────────────────────────────── */
-.events-section { background: var(--cream); }
+/* ═══════════════════════════════════════════════════════
+   EVENTS SECTION (Informasi Acara)
+   ═══════════════════════════════════════════════════════ */
+
+.events-section { 
+  background: var(--cream); 
+}
+
 .events-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;  /* 2 kolom sama besar */
   gap: 1.5rem;
   margin-top: 2.5rem;
 }
-@media (max-width: 560px) { .events-grid { grid-template-columns: 1fr; } }
+/* Responsive: 1 kolom di mobile */
+@media (max-width: 560px) { 
+  .events-grid { 
+    grid-template-columns: 1fr; 
+  } 
+}
 
+/* Kartu event */
 .event-card {
   background: white;
   border-radius: var(--radius);
@@ -451,13 +613,16 @@ body {
   box-shadow: var(--shadow);
   transition: var(--trans);
 }
-.event-card:hover { transform: translateY(-4px); }
+.event-card:hover { 
+  transform: translateY(-4px); 
+}
 
+/* Icon event (lingkaran dengan gradient) */
 .event-icon {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #f5ebe0, #e8d5b7);
+  background: linear-gradient(135deg, #f5ebe0, #e8d5b7);  /* Gradient cream */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -465,6 +630,7 @@ body {
   color: var(--gold-dark);
 }
 
+/* Judul event */
 .event-title {
   font-family: var(--ff-serif);
   font-size: 1.5rem;
@@ -473,17 +639,23 @@ body {
   margin-bottom: 1rem;
 }
 
+/* Detail event (tanggal, waktu, lokasi) */
 .event-detail {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-start;    /* Rata atas untuk ikon + teks */
   gap: 0.6rem;
   font-size: 0.85rem;
   color: var(--text-light);
   margin-bottom: 0.5rem;
   line-height: 1.5;
 }
-.event-detail svg { flex-shrink: 0; margin-top: 2px; color: var(--gold-dark); }
+.event-detail svg { 
+  flex-shrink: 0;             /* Cegah ikon mengecil */
+  margin-top: 2px; 
+  color: var(--gold-dark); 
+}
 
+/* Tombol Google Maps */
 .btn-map {
   display: inline-flex;
   align-items: center;
@@ -495,48 +667,75 @@ body {
   border-radius: 100px;
   font-size: 0.78rem;
   font-weight: 500;
-  text-decoration: none;
+  text-decoration: none;      /* Hapus underline link */
   transition: var(--trans);
 }
-.btn-map:hover { opacity: 0.85; transform: translateY(-2px); }
+.btn-map:hover { 
+  opacity: 0.85; 
+  transform: translateY(-2px); 
+}
 
-/* ── GALLERY ─────────────────────────────────────── */
-.gallery-section { background: #faf7f2; }
+/* ═══════════════════════════════════════════════════════
+   GALLERY SECTION (Galeri Foto)
+   ═══════════════════════════════════════════════════════ */
+
+.gallery-section { 
+  background: var(--cream-light); 
+}
+
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);  /* 3 kolom sama besar */
   gap: 0.75rem;
   margin-top: 2rem;
 }
-@media (max-width: 480px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
-
-.gallery-item {
-  aspect-ratio: 1;
-  background: #e8ddd0 center/cover no-repeat;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: var(--trans);
-  overflow: hidden;
+/* Responsive: 2 kolom di mobile kecil */
+@media (max-width: 480px) { 
+  .gallery-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+  } 
 }
-.gallery-item:hover { transform: scale(1.04); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
 
-/* ── LIGHTBOX ─────────────────────────────────────── */
+/* Item galeri */
+.gallery-item {
+  aspect-ratio: 1;            /* Rasio 1:1 (persegi) */
+  background: #e8dfd4 center/cover no-repeat;  /* Placeholder + background image */
+  border-radius: 10px;
+  cursor: pointer;            /* Cursor pointer untuk indikasi klik */
+  transition: var(--trans);
+  overflow: hidden;           /* Sembunyikan overflow saat zoom */
+}
+.gallery-item:hover { 
+  transform: scale(1.04);     /* Zoom sedikit saat hover */
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15); 
+}
+
+/* ═══════════════════════════════════════════════════════
+   LIGHTBOX (Popup Foto Full Size)
+   ═══════════════════════════════════════════════════════ */
+
 .lightbox {
-  display: none;
+  display: none;              /* Default: tersembunyi */
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.92);
-  z-index: 200;
+  background: rgba(0,0,0,0.92);  /* Overlay hitam transparan */
+  z-index: 200;               /* Di atas semua elemen */
   align-items: center;
   justify-content: center;
 }
-.lightbox.active { display: flex; }
-.lightbox-img {
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 8px;
-  object-fit: contain;
+/* Kelas .active ditambahkan via JS untuk menampilkan lightbox */
+.lightbox.active { 
+  display: flex; 
 }
+
+.lightbox-img {
+  max-width: 90vw;            /* Max 90% lebar viewport */
+  max-height: 90vh;           /* Max 90% tinggi viewport */
+  border-radius: 8px;
+  object-fit: contain;        /* Foto utuh tidak terpotong */
+}
+
+/* Tombol tutup lightbox (X) */
 .lightbox-close {
   position: absolute;
   top: 1.5rem;
@@ -551,61 +750,92 @@ body {
   font-size: 1rem;
   transition: var(--trans);
 }
-.lightbox-close:hover { background: white; color: black; }
+.lightbox-close:hover { 
+  background: white; 
+  color: black; 
+}
 
-/* ── RSVP ─────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   RSVP SECTION (Form Konfirmasi)
+   ═══════════════════════════════════════════════════════ */
+
 .rsvp-section {
-  background: var(--bg-2);
+  background: var(--bg-2);    /* Navy medium */
   max-width: 100%;
   padding: clamp(4rem, 10vw, 8rem) clamp(1.25rem, 5vw, 3rem);
 }
-.rsvp-inner { max-width: 620px; margin: 0 auto; text-align: center; }
+.rsvp-inner { 
+  max-width: 620px; 
+  margin: 0 auto; 
+  text-align: center; 
+}
 
+/* Form container */
 .rsvp-form {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.04);  /* Putih transparan tipis */
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 2rem;
   margin-top: 2rem;
-  text-align: left;
+  text-align: left;           /* Teks rata kiri untuk form */
 }
 
-.form-group { margin-bottom: 1.25rem; }
+/* Group input form */
+.form-group { 
+  margin-bottom: 1.25rem; 
+}
 .form-group label {
   display: block;
   font-size: 0.78rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gold-light);
+  color: var(--gold-light);   /* Emas terang untuk label di background navy */
   margin-bottom: 0.4rem;
 }
 
+/* Styling input, textarea, select */
 .form-group input,
 .form-group textarea,
 .form-group select {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.06);  /* Putih transparan */
   border: 1px solid var(--border);
   border-radius: 8px;
-  color: var(--cream);
+  color: var(--cream);                 /* Teks cream */
   font-family: var(--ff-sans);
   font-size: 0.9rem;
   transition: var(--trans);
-  outline: none;
+  outline: none;              /* Hapus outline default browser */
 }
+/* Focus state: saat input diklik */
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-  border-color: var(--gold);
+  border-color: var(--gold);  /* Border jadi emas */
   background: rgba(255,255,255,0.08);
 }
+/* Placeholder color */
 .form-group input::placeholder,
-.form-group textarea::placeholder { color: rgba(245,239,230,0.3); }
-.form-group select option { background: var(--bg-2); }
-.form-group textarea { resize: vertical; min-height: 80px; }
+.form-group textarea::placeholder { 
+  color: rgba(245,240,230,0.3); 
+}
+/* Option di select (untuk browser yang support) */
+.form-group select option { 
+  background: var(--bg-2); 
+}
+/* Textarea resizable vertikal saja */
+.form-group textarea { 
+  resize: vertical; 
+  min-height: 80px; 
+}
 
-.radio-group { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+/* Radio button group */
+.radio-group { 
+  display: flex; 
+  gap: 1.5rem; 
+  flex-wrap: wrap; 
+}
 .radio-label {
   display: flex;
   align-items: center;
@@ -614,8 +844,12 @@ body {
   color: var(--cream);
   cursor: pointer;
 }
-.radio-label input { width: auto; accent-color: var(--gold); }
+.radio-label input { 
+  width: auto; 
+  accent-color: var(--gold);  /* Warna radio button jadi emas */
+}
 
+/* Tombol submit form */
 .btn-submit {
   width: 100%;
   padding: 0.9rem;
@@ -631,10 +865,22 @@ body {
   transition: var(--trans);
   margin-top: 0.5rem;
 }
-.btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
-.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.btn-submit:hover { 
+  opacity: 0.9; 
+  transform: translateY(-2px); 
+}
+/* Disabled state */
+.btn-submit:disabled { 
+  opacity: 0.6; 
+  cursor: not-allowed; 
+  transform: none; 
+}
 
-.rsvp-list { margin-top: 3rem; text-align: left; }
+/* Daftar ucapan tamu */
+.rsvp-list { 
+  margin-top: 3rem; 
+  text-align: left; 
+}
 .rsvp-list h3 {
   font-family: var(--ff-serif);
   font-size: 1.3rem;
@@ -643,6 +889,7 @@ body {
   text-align: center;
 }
 
+/* Item ucapan */
 .rsvp-message-item {
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--border);
@@ -664,21 +911,34 @@ body {
 }
 .rsvp-msg-text {
   font-size: 0.85rem;
-  color: rgba(245,239,230,0.7);
+  color: rgba(245,240,230,0.7);
   line-height: 1.5;
   font-style: italic;
 }
 
-/* ── GIFT ─────────────────────────────────────────── */
-.gift-section { background: var(--cream); text-align: center; }
+/* ═══════════════════════════════════════════════════════
+   GIFT SECTION (Informasi Rekening)
+   ═══════════════════════════════════════════════════════ */
+
+.gift-section { 
+  background: var(--cream); 
+  text-align: center; 
+}
+
 .gift-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;  /* 2 kolom */
   gap: 1.25rem;
   margin-top: 2rem;
 }
-@media (max-width: 480px) { .gift-grid { grid-template-columns: 1fr; } }
+/* Responsive: 1 kolom di mobile */
+@media (max-width: 480px) { 
+  .gift-grid { 
+    grid-template-columns: 1fr; 
+  } 
+}
 
+/* Kartu rekening */
 .gift-card {
   background: white;
   border-radius: var(--radius);
@@ -687,8 +947,11 @@ body {
   box-shadow: var(--shadow);
   transition: var(--trans);
 }
-.gift-card:hover { transform: translateY(-4px); }
+.gift-card:hover { 
+  transform: translateY(-4px); 
+}
 
+/* Nama bank */
 .gift-bank {
   font-family: var(--ff-serif);
   font-size: 1.2rem;
@@ -696,20 +959,25 @@ body {
   color: var(--text);
   margin-bottom: 0.5rem;
 }
+
+/* Nama pemilik rekening */
 .gift-account-name {
   font-size: 0.85rem;
   color: var(--text-light);
   margin-bottom: 0.4rem;
 }
+
+/* Nomor rekening */
 .gift-account-number {
   font-size: 1.2rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.08em;     /* Jarak huruf agar nomor mudah dibaca */
   color: var(--gold-dark);
   margin-bottom: 1rem;
   font-family: var(--ff-serif);
 }
 
+/* Tombol copy nomor rekening */
 .btn-copy {
   padding: 0.5rem 1.25rem;
   border: 1px solid var(--gold-dark);
@@ -721,14 +989,20 @@ body {
   cursor: pointer;
   transition: var(--trans);
 }
-.btn-copy:hover, .btn-copy.copied { background: var(--gold-dark); color: white; }
+.btn-copy:hover, .btn-copy.copied { 
+  background: var(--gold-dark); 
+  color: white; 
+}
 
+/* Judul alamat pengiriman */
 .gift-address-title {
   font-family: var(--ff-serif);
   font-size: 1.1rem;
   color: var(--text);
   margin-top: 2rem;
 }
+
+/* Alamat */
 .gift-address {
   font-size: 0.9rem;
   color: var(--text-light);
@@ -736,34 +1010,51 @@ body {
   margin-top: 0.5rem;
 }
 
-/* ── CLOSING ─────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   CLOSING SECTION (Penutup)
+   ═══════════════════════════════════════════════════════ */
+
 .closing-section {
-  background: var(--bg);
+  background: var(--bg);      /* Navy gelap */
   text-align: center;
   max-width: 100%;
   padding: clamp(4rem, 10vw, 8rem) clamp(1.25rem, 5vw, 3rem);
   position: relative;
   overflow: hidden;
 }
+
+/* Background effect closing */
 .floral-closing {
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,169,110,0.06) 0%, transparent 70%);
   pointer-events: none;
 }
-.closing-inner { position: relative; max-width: 600px; margin: 0 auto; }
-.closing-inner .section-subtitle { color: rgba(245,239,230,0.6); }
-.closing-inner .section-title-script { color: var(--gold); font-size: clamp(3rem, 9vw, 5rem); }
 
+.closing-inner { 
+  position: relative; 
+  max-width: 600px; 
+  margin: 0 auto; 
+}
+.closing-inner .section-subtitle { 
+  color: rgba(245,240,230,0.6); 
+}
+.closing-inner .section-title-script { 
+  color: var(--gold); 
+  font-size: clamp(3rem, 9vw, 5rem); 
+}
+
+/* Teks penutup */
 .closing-text {
   font-family: var(--ff-serif);
   font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-  color: rgba(245,239,230,0.7);
+  color: rgba(245,240,230,0.7);
   line-height: 1.8;
   margin-bottom: 1.5rem;
   font-style: italic;
 }
 
+/* Hashtag */
 .closing-hashtag {
   font-family: var(--ff-sans);
   font-size: 1rem;
@@ -772,16 +1063,23 @@ body {
   margin-bottom: 2.5rem;
 }
 
+/* Bagian share sosmed */
 .social-share p {
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(245,239,230,0.4);
+  color: rgba(245,240,230,0.4);
   margin-bottom: 1rem;
 }
 
-.share-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+.share-btns { 
+  display: flex; 
+  gap: 0.75rem; 
+  justify-content: center; 
+  flex-wrap: wrap; 
+}
 
+/* Tombol share umum */
 .btn-share {
   display: inline-flex;
   align-items: center;
@@ -795,20 +1093,38 @@ body {
   cursor: pointer;
   transition: var(--trans);
 }
-.btn-share.wa { background: #25D366; color: white; }
-.btn-share.wa:hover { background: #1ebe5a; transform: translateY(-2px); }
-.btn-share.copy { background: rgba(255,255,255,0.08); color: var(--cream); border: 1px solid var(--border); }
-.btn-share.copy:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+/* Tombol WhatsApp (hijau khas WA) */
+.btn-share.wa { 
+  background: #25D366; 
+  color: white; 
+}
+.btn-share.wa:hover { 
+  background: #1ebe5a; 
+  transform: translateY(-2px); 
+}
+/* Tombol Copy Link */
+.btn-share.copy { 
+  background: rgba(255,255,255,0.08); 
+  color: var(--cream); 
+  border: 1px solid var(--border); 
+}
+.btn-share.copy:hover { 
+  background: rgba(255,255,255,0.14); 
+  transform: translateY(-2px); 
+}
 
-/* ── MUSIC TOGGLE ────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   MUSIC TOGGLE (Tombol Kontrol Musik)
+   ═══════════════════════════════════════════════════════ */
+
 .music-toggle {
-  position: fixed;
+  position: fixed;            /* Melayang tetap di layar */
   bottom: 1.5rem;
   right: 1.5rem;
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--gold);    /* Background emas */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -816,55 +1132,96 @@ body {
   z-index: 50;
   box-shadow: 0 4px 20px rgba(201,169,110,0.4);
   transition: var(--trans);
-  color: var(--bg);
+  color: var(--bg);           /* Ikon navy di atas emas */
 }
-.music-toggle:hover { transform: scale(1.1); }
-.music-toggle.paused { background: rgba(201,169,110,0.3); color: var(--gold); border: 1px solid var(--gold); }
+.music-toggle:hover { 
+  transform: scale(1.1);      /* Membesar sedikit saat hover */
+}
+/* State paused: saat musik dimatikan */
+.music-toggle.paused { 
+  background: rgba(201,169,110,0.3); 
+  color: var(--gold); 
+  border: 1px solid var(--gold); 
+}
 
-@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-.music-toggle.playing svg { animation: spin 4s linear infinite; }
+/* Animasi putar ikon musik */
+@keyframes spin { 
+  from { transform: rotate(0deg); } 
+  to { transform: rotate(360deg); } 
+}
+/* Terapkan animasi saat musik bermain */
+.music-toggle.playing svg { 
+  animation: spin 4s linear infinite; 
+}
 
-/* ── TOAST ───────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   TOAST (Notifikasi Popup)
+   ═══════════════════════════════════════════════════════ */
+
 .toast {
   position: fixed;
   bottom: 5rem;
   left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: var(--text);
-  color: var(--cream);
+  transform: translateX(-50%) translateY(20px);  /* Awal: di bawah + transparan */
+  background: var(--text);    /* Background navy gelap */
+  color: var(--cream);        /* Teks cream */
   padding: 0.7rem 1.5rem;
   border-radius: 100px;
   font-size: 0.82rem;
-  opacity: 0;
-  pointer-events: none;
+  opacity: 0;                 /* Awal: transparan */
+  pointer-events: none;       /* Tidak bisa diklik saat hidden */
   transition: 0.3s ease;
   z-index: 999;
-  white-space: nowrap;
+  white-space: nowrap;        /* Teks tidak turun baris */
 }
+/* Kelas .show ditambahkan via JS untuk menampilkan toast */
 .toast.show {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(0);  /* Naik ke posisi normal */
 }
 
-/* ── ANIMATIONS ──────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   ANIMATIONS (Keyframes & Utility Classes)
+   ═══════════════════════════════════════════════════════ */
+
+/* Animasi fade + slide up */
 @keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { 
+    opacity: 0; 
+    transform: translateY(24px);  /* Mulai: transparan + di bawah */
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);     /* Akhir: solid + posisi normal */
+  }
 }
 
+/* Utility classes untuk animasi scroll (Intersection Observer) */
 .fade-up, .fade-left, .fade-right {
-  opacity: 0;
+  opacity: 0;                     /* Awal: transparan */
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.fade-up    { transform: translateY(30px); }
-.fade-left  { transform: translateX(-30px); }
-.fade-right { transform: translateX(30px); }
+.fade-up    { transform: translateY(30px); }   /* Siap: di bawah */
+.fade-left  { transform: translateX(-30px); }  /* Siap: di kiri */
+.fade-right { transform: translateX(30px); }   /* Siap: di kanan */
+
+/* Kelas .visible ditambahkan via JS saat elemen masuk viewport */
 .fade-up.visible, .fade-left.visible, .fade-right.visible {
   opacity: 1;
-  transform: none;
+  transform: none;                /* Kembali ke posisi normal */
 }
 
-/* ── SCROLLBAR ───────────────────────────────────── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+/* ═══════════════════════════════════════════════════════
+   CUSTOM SCROLLBAR (Untuk Browser WebKit: Chrome, Safari, Edge)
+   ═══════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar { 
+  width: 4px;                     /* Lebar scrollbar tipis */
+}
+::-webkit-scrollbar-track { 
+  background: var(--bg);          /* Track warna navy */
+}
+::-webkit-scrollbar-thumb { 
+  background: var(--gold-dark);   /* Thumb warna emas gelap */
+  border-radius: 4px;             /* Sudut rounded */
+}
