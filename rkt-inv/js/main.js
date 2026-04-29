@@ -1,5 +1,4 @@
 /* ─────────────────────────────────────────────────
-   main.js — Wedding Invitation Logic
    Tema: RAKOTE COFFEE Re-Opening
    ───────────────────────────────────────────────── */
 
@@ -143,7 +142,7 @@ document.getElementById('openBtn')?.addEventListener('click', function () {
 // ═════════════════════════════════════════════════
 // Konstanta: Tanggal acara dalam format ISO 8601
 // Format: 'YYYY-MM-DDTHH:mm:ss' (T = pemisah tanggal & waktu)
-const WEDDING_DATE = new Date('2025-06-14T08:00:00');
+const WEDDING_DATE = new Date('2026-05-02T08:00:00');
 // new Date() = objek JavaScript untuk manipulasi tanggal/waktu
 
 // Fungsi utama countdown
@@ -516,7 +515,7 @@ window.shareWA = function () {
   const url = encodeURIComponent(window.location.href);
   
   // Encode teks pesan WhatsApp
-  const text = encodeURIComponent('Anda diundang ke Pernikahan Arjuna & Sinta 🌸\nSabtu, 14 Juni 2025\n\nBuka undangan di sini:');
+  const text = encodeURIComponent('Anda diundang ke Re-Opening Rakote Coffee\nSabtu, 2 Mei 2026\n\nBuka undangan di sini:');
   // \n = newline (ganti baris) di WhatsApp
   
   // ── BUILD WA API URL ──
