@@ -96,8 +96,8 @@ function startCountdown() {
 // ═════════════════════════════════════════════════
 document.getElementById('calendarBtn')?.addEventListener('click', function () {
   const title = encodeURIComponent('ST18 for Rakote Coffee');
-  const start = '20250614T080000';
-  const end   = '20250614T140000'; 
+  const start = '20260502T140000';
+  const end   = '20260502T220000'; 
   const loc   = encodeURIComponent('Jakarta, Indonesia');
   const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&location=${loc}`;
   window.open(url, '_blank');
