@@ -89,7 +89,7 @@ function startCountdown() {
   }
   tick();
   setInterval(tick, 1000);
-
+}
 
 // ═════════════════════════════════════════════════
 // 5. ADD TO CALENDAR (Tambah ke Google Calendar)
