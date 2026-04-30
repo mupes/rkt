@@ -43,8 +43,10 @@ const sb = {
   const params = new URLSearchParams(window.location.search);
   const name = params.get('to') || params.get('nama');
   if (name) {
-    const el = document.getElementById('guest-name');
-    if (el) el.textContent = decodeURIComponent(name);
+    const decoded = decodeURIComponent(name);
+    document.querySelectorAll('.guest-name').forEach(el => {
+      el.textContent = decoded;
+    });
   }
 })();
 
